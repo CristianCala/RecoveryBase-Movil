@@ -1,0 +1,99 @@
+
+ScreenManager:
+	StartupScreen:
+	MenuScreen:
+
+<StartupScreen>
+	name: 'startup'
+	canvas.before:
+		Color:
+			rgba: (0,0,0,1)
+		Rectangle:
+			size: self.size
+			pos: self.pos
+
+	Image:
+		id: img_logo
+		allow_strech: True
+		keep_ratio: False
+		source: 'img/Recovery.ico'
+		size_hint_y: .5
+		size_hint_x: .8
+		pos_hint : {'center_x': .5, 'center_y': .5}
+	BoxLayout:
+		orientation: 'vertical'
+		padding: 100
+
+		MDRaisedButton:
+			text: "SIGUIENTE"
+			pos_hint: {'center_x':.5, 'center_y': .3}
+			on_press: root.manager.current = 'menu'
+
+		# MDSpinner:
+		# 	size_hint: None, None
+		# 	size: dp(48), dp(48)
+		# 	pos_hint: {'center_x': .5, 'center_y': .5}
+
+<MenuScreen>
+	name: 'menu'
+	BoxLayout:
+		orientation: 'vertical'
+
+		MDToolbar:
+			title: 'RecoveryBase'
+			elevation: 10
+			left_action_items: [["menu", lambda x: app.menu()]]
+			right_action_items: [["dots-vertical", lambda x: app.menu()]]
+
+
+		MDTabs:
+			id: tabs
+			on_tab_switch: app.menu()
+			Tab:
+				text: 'Tabla de Usuarios'
+
+				# BoxLayout:
+				# 	orientation: 'horizontal'
+
+				MDRectangleFlatIconButton:
+					text: "Usuarios"
+					icon: "account-multiple-outline"
+					line_color: 0, 0, 0, 0
+					pos_hint: {"center_x": .5, "center_y": .2}
+			Tab:
+				text: 'Editar'
+				BoxLayout:
+					orientation: 'vertical'
+					MDLabel:
+						text: 'Editar label'
+						halign: 'center'
+						font_name: 'PoiretOne-Regular.ttf'
+
+			Tab:
+				text: 'Recargar'
+				BoxLayout:
+					orientation: 'vertical'
+					MDLabel:
+						text: 'Recargar label'
+						halign: 'center'
+						font_name: 'PoiretOne-Regular.ttf'
+
+			Tab:
+				text: 'Agregar Usuario'
+
+			Tab:
+				text: 'Eliminar'
+
+			Tab:
+				text: 'Salir'
+
+
+		MDLabel:
+			text: 'Para visualizar la tabla de usuarios, presione el botón'
+			halign: 'center'
+			font_size: '25sp'
+			font_name: 'PoiretOne-Regular.ttf'
+
+		MDBottomAppBar:
+			MDToolbar:
+				title: 'Gestión'
